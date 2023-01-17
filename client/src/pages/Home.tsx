@@ -3,15 +3,8 @@ import { getData } from "../lib/fetch";
 import { useQuery } from "@tanstack/react-query";
 
 const Home = (): JSX.Element => {
-  const {
-    data: drones,
-    isLoading,
-    isError,
-  } = useQuery(["drones"], () =>
-    getData("").then(res => {
-      console.log(res.data);
-      return res.data;
-    })
+  const { data, isLoading, isError } = useQuery(["drones"], () =>
+    getData("").then(res => res.data)
   );
 
   if (isError) {
@@ -26,11 +19,22 @@ const Home = (): JSX.Element => {
     return <h1>Loading...</h1>;
   }
 
+  const pilots = Object.keys(data).map(key => data[key]);
+
   return (
-    <>
-      <h1>Home</h1>
-      {drones}
-    </>
+    <div className='container'>
+      <h1>Bird Nest</h1>
+      <h2>Pilots violating birds peace:</h2>
+      <p>Information within the last 10 minutes</p>
+      <ol className='list-group list-group-numbered'>
+        {pilots.map(pilot => (
+          <li className='list-group-item' key={pilot.pilot_id}>
+            {pilot.first_name} {pilot.last_name}, email: {pilot.email}, phone:{" "}
+            {pilot.phone}
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 };
 

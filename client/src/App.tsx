@@ -4,7 +4,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Home, NotFound } from "./pages";
 
 function App() {
-  const client = new QueryClient();
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: { refetchInterval: 2000 },
+    },
+  });
 
   return (
     <QueryClientProvider client={client}>
