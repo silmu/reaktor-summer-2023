@@ -43,3 +43,8 @@ The project is built with React + Node.js. Node-Cache was chosen over a database
 - Express
 - Fast-Xml-Parser
 - Node-Cache
+
+## How to run locally
+
+1. Git clone repository
+2. Follow steps in client and server README files.
