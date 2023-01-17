@@ -23,7 +23,7 @@ const Home = (): JSX.Element => {
 
   return (
     <div className='container'>
-      <h1>Bird Nest</h1>
+      <h1 className=''>Bird Nest 🪺 🦤</h1>
       <h2>Pilots violating birds peace:</h2>
       <p>Information within the last 10 minutes</p>
       <ol className='list-group list-group-numbered'>
