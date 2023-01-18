@@ -10,6 +10,8 @@ module.exports = async (req, res) => {
     // Check if drones violate the border
     const violators = getViolators(await parseXML(drones.data));
 
+    console.log(violators);
+
     violators.forEach(async id => {
       try {
         let pilotInfo = await axios.get(`${process.env.BASEURL}/pilots/${id}`);
@@ -30,13 +32,6 @@ module.exports = async (req, res) => {
           // Store pilot info to cache
           myCache.set(id, toStore);
         }
-
-        // "pilotId": "P-kXrMCixYG6",
-        // "firstName": "Clarissa",
-        // "lastName": "Bednar",
-        // "phoneNumber": "+210144136493",
-        // "createdDt": "2022-08-12T20:30:18.698Z",
-        // "email": "clarissa.bednar@example.com"
       } catch (err) {
         console.log(`Server error: ${err}`);
       }
@@ -44,7 +39,6 @@ module.exports = async (req, res) => {
 
     const allPilotsIds = myCache.keys();
     res.json(myCache.mget(allPilotsIds));
-    // res.send(allPilotsIds);
   } catch (err) {
     res.status(500).send(`Server error ${err}`);
   }
